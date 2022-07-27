@@ -1,0 +1,10 @@
+.text-bubble {
+    margin: 0.5rem 0.5rem;
+    padding: 0 1rem;
+    background-color: white;
+    list-style: none;
+    width: max-content;
+    max-width: 80%;
+    font-size: large;
+    border-radius: 1rem;
+}

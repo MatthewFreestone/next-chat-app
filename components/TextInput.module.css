@@ -1,0 +1,37 @@
+.send-bar {
+  --border-radius-send: 0.5rem;
+  margin: 0.5rem auto;
+  width: 70%;
+  background-color: white;
+  border-radius: var(--border-radius-send);
+}
+
+.message-input {
+  width: 90%;
+  padding-left: 0.5rem;
+  font-size: large;
+  border: none;
+  border-radius: var(--border-radius-send) 0 0 var(--border-radius-send);
+}
+.message-input:focus {
+  outline: none;
+  background-color: rgba(10, 96, 166, 0.1);
+}
+
+.send-button {
+  border: none;
+  text-align: center;
+  border-left: 1px solid gray;
+  border-radius: 0 var(--border-radius-send) var(--border-radius-send) 0;
+  width: 10%;
+  min-width: min-content;
+  font-size: large;
+  height: 100%;
+}
+.send-button:hover {
+  background-color: rgb(10, 96, 166);
+  color: white;
+}
+.send-button:active {
+  background-color: green;
+}
