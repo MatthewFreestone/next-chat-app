@@ -2,15 +2,19 @@ import TextBubble from "./TextBubble";
 const ChatDisplay = ({ messages }: ChatDisplayProps) => {
   return (
     <ul style={{"paddingTop": "0.5rem"}}>
-      {messages.map((message, index) => {
-        return <TextBubble content={message} key={index.toString()} />
+      {messages.map(({content, user, id}) => {
+        return <TextBubble content={content} key={id} />
       })}
     </ul>
   );
 };
 
 export type ChatDisplayProps = {
-  messages: string[];
+  messages: {
+    id: number,
+    user: string,
+    content: string
+  }[];
 };
 
 export default ChatDisplay;

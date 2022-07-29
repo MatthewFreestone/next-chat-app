@@ -4,7 +4,7 @@ const TextBubble = ({ key, content }: TextBubbleProps) => {
 };
 
 export type TextBubbleProps = {
-  key: string;
+  key: number;
   content: string;
 };
 export default TextBubble;
