@@ -11,7 +11,7 @@ export default async function handler(
   const newMessage = await prisma.message.create({
     data,
   });
-  console.log(`Added new message: ${newMessage}`);
+  console.log(`Added new message: "${newMessage.content}" from "${newMessage.user}"`);
   res.status(200).send(data);
   prisma.$disconnect()
 }

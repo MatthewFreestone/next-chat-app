@@ -14,6 +14,10 @@ const Home: NextPage = () => {
   const [messages, setMessages] = useState<messageType[]>([]);
 
   const addMessageHandler = (message: string) => {
+    if (!message) {
+      return
+    }
+
     const data = {
       content: message,
       user: "User",
@@ -28,6 +32,12 @@ const Home: NextPage = () => {
       })
       .catch((err) => console.error(err));
   };
+
+  const deleteAllMessages = () => {
+    fetch("http://localhost:3000/api/deleteAllMessages", {method: "POST"}).then(() => {
+      refreshChatDisplay();
+    })
+  }
 
   const refreshChatDisplay = () => {
     fetch("http://localhost:3000/api/getMessages")
@@ -44,6 +54,10 @@ const Home: NextPage = () => {
     <>
       <div className={styles["title-holder"]}>
         <h1 className={styles["title"]}>Chat App</h1>
+      </div>
+      <div className={styles["toolbar-holder"]}>
+        <button className={styles["toolbar-button"]} onClick={refreshChatDisplay}>Refresh</button>
+        <button className={styles["toolbar-button"]} onClick={deleteAllMessages}>Delete All</button>
       </div>
       <div className={styles["chat-display-holder"]}>
         <ChatDisplay messages={messages} />
