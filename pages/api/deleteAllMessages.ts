@@ -7,8 +7,8 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const prisma = new PrismaClient();
-  const {count} = await prisma.message.deleteMany()
+  const { count } = await prisma.message.deleteMany();
   console.log(`Deleted ${count} Messages.`);
-  res.status(200).send("Success")
-  prisma.$disconnect()
+  res.status(200).send("Success");
+  prisma.$disconnect();
 }

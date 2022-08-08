@@ -15,7 +15,7 @@ const Home: NextPage = () => {
 
   const addMessageHandler = (message: string) => {
     if (!message) {
-      return
+      return;
     }
 
     const data = {
@@ -34,10 +34,12 @@ const Home: NextPage = () => {
   };
 
   const deleteAllMessages = () => {
-    fetch("http://localhost:3000/api/deleteAllMessages", {method: "POST"}).then(() => {
+    fetch("http://localhost:3000/api/deleteAllMessages", {
+      method: "POST",
+    }).then(() => {
       refreshChatDisplay();
-    })
-  }
+    });
+  };
 
   const refreshChatDisplay = () => {
     fetch("http://localhost:3000/api/getMessages")
@@ -56,8 +58,18 @@ const Home: NextPage = () => {
         <h1 className={styles["title"]}>Chat App</h1>
       </div>
       <div className={styles["toolbar-holder"]}>
-        <button className={styles["toolbar-button"]} onClick={refreshChatDisplay}>Refresh</button>
-        <button className={styles["toolbar-button"]} onClick={deleteAllMessages}>Delete All</button>
+        <button
+          className={styles["toolbar-button"]}
+          onClick={refreshChatDisplay}
+        >
+          Refresh
+        </button>
+        <button
+          className={styles["toolbar-button"]}
+          onClick={deleteAllMessages}
+        >
+          Delete All
+        </button>
       </div>
       <div className={styles["chat-display-holder"]}>
         <ChatDisplay messages={messages} />
