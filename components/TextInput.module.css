@@ -4,6 +4,7 @@
   width: 70%;
   background-color: white;
   border-radius: var(--border-radius-send);
+  display: flex;
 }
 
 .message-input {
@@ -24,13 +25,13 @@
   border-left: 1px solid gray;
   border-radius: 0 var(--border-radius-send) var(--border-radius-send) 0;
   width: 10%;
-  min-width: min-content;
+  min-width: max-content;
   font-size: large;
   height: 100%;
 }
 .send-button:hover {
-  background-color: rgb(10, 96, 166);
-  color: white;
+  background-color: darkgray;
+  /* color: white; */
 }
 .send-button:active {
   background-color: green;
