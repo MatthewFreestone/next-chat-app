@@ -1,7 +1,8 @@
 import TextBubble from "./TextBubble";
+import { Message } from "@prisma/client";
 const ChatDisplay = ({ messages }: ChatDisplayProps) => {
   return (
-    <ul style={{ paddingTop: "0.5rem" }}>
+    <ul>
       {messages.map(({ content, user, id }) => {
         return <TextBubble content={content} user={user} key={id} />;
       })}
@@ -10,11 +11,7 @@ const ChatDisplay = ({ messages }: ChatDisplayProps) => {
 };
 
 export type ChatDisplayProps = {
-  messages: {
-    id: number;
-    user: string;
-    content: string;
-  }[];
+  messages: Message[]
 };
 
 export default ChatDisplay;

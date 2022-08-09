@@ -15,7 +15,12 @@
     "jsx": "preserve",
     "incremental": true,
     "noImplicitAny": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "typeRoots": ["node_modules/@types", "types"],
+    "baseUrl": "./",
+    "paths": {
+      // "@types/*": ["./types/*"]
+    }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]

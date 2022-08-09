@@ -3,15 +3,14 @@ import { useState, useRef, useEffect } from "react";
 import ChatDisplay from "../components/ChatDisplay";
 import TextInput from "../components/TextInput";
 import styles from "../styles/Home.module.css";
-import { PrismaClient } from "@prisma/client";
+import { io, Socket } from "Socket.IO-client";
+import type {Message} from '@prisma/client'
+import { ClientToServerEvents, ServerToClientEvents } from "types/websocket";
 
 const Home: NextPage = () => {
-  type messageType = {
-    id: number;
-    content: string;
-    user: string;
-  };
-  const [messages, setMessages] = useState<messageType[]>([]);
+  
+  const [messages, setMessages] = useState<Message[]>([]);
+  const socket = useRef<Socket<ServerToClientEvents, ClientToServerEvents>>();
 
   const addMessageHandler = (message: string) => {
     if (!message) {
@@ -33,8 +32,15 @@ const Home: NextPage = () => {
       .catch((err) => console.error(err));
   };
 
+  const addMessageHandlerWs = (message: string) => {
+    if (!message) {
+      return;
+    }
+    socket?.current?.emit("newMessage", message);
+  };
+
   const deleteAllMessages = () => {
-    fetch("http://localhost:3000/api/deleteAllMessages", {
+    fetch("/api/deleteAllMessages", {
       method: "POST",
     }).then(() => {
       refreshChatDisplay();
@@ -42,7 +48,7 @@ const Home: NextPage = () => {
   };
 
   const refreshChatDisplay = () => {
-    fetch("http://localhost:3000/api/getMessages")
+    fetch("/api/getMessages")
       .then((resp) => resp.json())
       .then((json) => {
         console.log(json);
@@ -50,7 +56,27 @@ const Home: NextPage = () => {
       });
   };
 
-  useEffect(refreshChatDisplay, []);
+  const initializeSocket = async () => {
+    await fetch("/api/socket");
+    socket.current = io();
+    socket.current.on("connect", () => {
+      console.log("connected");
+    });
+  };
+
+  const registerSocketCallbacks = () => {
+    socket?.current?.on("updateMessages", (msgs) => {
+      console.info("Recieved new messages from websocket")
+      setMessages(msgs);
+    });
+  };
+
+  useEffect(() => {
+    // refreshChatDisplay();
+    initializeSocket().then(
+      registerSocketCallbacks
+    );
+  }, []);
 
   return (
     <>
@@ -74,7 +100,7 @@ const Home: NextPage = () => {
       <div className={styles["chat-display-holder"]}>
         <ChatDisplay messages={messages} />
       </div>
-      <TextInput onSend={addMessageHandler} />
+      <TextInput onSend={addMessageHandlerWs} />
     </>
   );
 };
