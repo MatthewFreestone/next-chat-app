@@ -4,6 +4,7 @@ import { Server } from "Socket.IO";
 import { getAllMessages } from "./getMessages";
 import { Message } from "@prisma/client";
 import type {ServerToClientEvents, ClientToServerEvents} from 'types/websocket'
+import { deleteAllMessages } from "./deleteAllMessages";
 
 export default async function handler(
   req: NextApiRequest,
@@ -41,5 +42,6 @@ const registerCallbacks = (io: Server<ClientToServerEvents, ServerToClientEvents
     socket.on("disconnect", () => {
       console.log("A user disconnected");
     });
+    socket.on("deleteAllMessages", async () => {await deleteAllMessages(); io.emit("updateMessages", await getAllMessages())})
   });
 };

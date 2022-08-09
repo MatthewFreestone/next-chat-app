@@ -47,6 +47,10 @@ const Home: NextPage = () => {
     });
   };
 
+  const deleteAllMessagesWs = () => {
+    socket?.current?.emit("deleteAllMessages")
+  };
+
   const refreshChatDisplay = () => {
     fetch("/api/getMessages")
       .then((resp) => resp.json())
@@ -92,7 +96,7 @@ const Home: NextPage = () => {
         </button>
         <button
           className={styles["toolbar-button"]}
-          onClick={deleteAllMessages}
+          onClick={deleteAllMessagesWs}
         >
           Delete All
         </button>
