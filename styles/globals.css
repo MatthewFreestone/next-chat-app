@@ -1,10 +1,15 @@
-html,
 body {
   background-color: lightgray;
   padding: 0;
   margin: 0.2rem;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  body{
+    background-color: rgb(65, 65, 65);
+  }
 }
 
 a {
@@ -14,16 +19,6 @@ a {
 
 * {
   box-sizing: border-box;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
 }
 
 ::-webkit-scrollbar {

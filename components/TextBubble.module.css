@@ -13,6 +13,7 @@
   flex-direction: column;
 }
 .user-label {
+  color: black;
   margin-left: 5px;
-  font-size: small;
+  font-size: medium;
 }
