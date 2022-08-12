@@ -1,8 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { insertMessage } from "./insertMessage";
-import { Server } from "Socket.IO";
+import { Server } from "socket.io";
 import { getAllMessages } from "./getMessages";
-import { Message } from "@prisma/client";
 import type {ServerToClientEvents, ClientToServerEvents} from 'types/websocket'
 import { deleteAllMessages } from "./deleteAllMessages";
 

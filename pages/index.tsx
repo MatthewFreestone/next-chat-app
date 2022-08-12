@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import ChatDisplay from "../components/ChatDisplay";
 import TextInput from "../components/TextInput";
 import styles from "../styles/Home.module.css";
-import { io, Socket } from "Socket.IO-client";
+import { io, Socket } from "socket.io-client";
 import type {Message} from '@prisma/client'
 import { ClientToServerEvents, ServerToClientEvents } from "types/websocket";
 
