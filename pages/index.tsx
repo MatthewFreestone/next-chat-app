@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import Head from "next/head";
 import { useState, useRef, useEffect } from "react";
 import ChatDisplay from "../components/ChatDisplay";
 import TextInput from "../components/TextInput";
@@ -84,6 +85,10 @@ const Home: NextPage = () => {
 
   return (
     <>
+      <Head>
+        <title>Chat App</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+      </Head>
       <div className={styles["title-holder"]}>
         <h1 className={styles["title"]}>Chat App</h1>
       </div>

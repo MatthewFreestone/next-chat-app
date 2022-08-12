@@ -19,6 +19,7 @@ const TextInput = ({ onSend }: TextInputProps) => {
         aria-label="Input for chat window"
         className={styles["message-input"]}
         ref={message}
+        type="text"
         onKeyUp={handleEnter}
       />
       <button className={styles["send-button"]} onClick={handleClick}>
