@@ -1,10 +1,10 @@
 import { KeyboardEventHandler, useRef } from "react";
 import styles from "./TextInput.module.css";
-const TextInput = ({ onSend }: TextInputProps) => {
+const TextInput = ({ onClick, buttonTitle }: TextInputProps) => {
   const message = useRef<HTMLInputElement>(null);
   const handleClick = () => {
     if (message.current) {
-      onSend(message.current.value);
+      onClick(message.current.value);
       message.current.value = "";
     }
   };
@@ -23,12 +23,13 @@ const TextInput = ({ onSend }: TextInputProps) => {
         onKeyUp={handleEnter}
       />
       <button className={styles["send-button"]} onClick={handleClick}>
-        Send
+        {buttonTitle}
       </button>
     </div>
   );
 };
 export type TextInputProps = {
-  onSend: (message: string) => void;
+  onClick: (message: string) => void;
+  buttonTitle: string;
 };
 export default TextInput;

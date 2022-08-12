@@ -32,8 +32,8 @@ const registerCallbacks = (io: Server<ClientToServerEvents, ServerToClientEvents
     console.log("A user connected, sending messages");
     socket.emit("updateMessages", await getAllMessages())
 
-    socket.on("newMessage", async (msg) => {
-      await insertMessage(msg, "User");
+    socket.on("newMessage", async (msg, user) => {
+      await insertMessage(msg, user);
       const msgs = await getAllMessages();
       io.emit("updateMessages", msgs);
       console.log("SENT UPDATE MESSAGES TO ALL");

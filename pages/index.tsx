@@ -7,10 +7,10 @@ import styles from "../styles/Home.module.css";
 import { io, Socket } from "socket.io-client";
 import type {Message} from '@prisma/client'
 import { ClientToServerEvents, ServerToClientEvents } from "types/websocket";
-
 const Home: NextPage = () => {
   
   const [messages, setMessages] = useState<Message[]>([]);
+  const [user, setUser] = useState<string>("User");
   const socket = useRef<Socket<ServerToClientEvents, ClientToServerEvents>>();
 
   const addMessageHandler = (message: string) => {
@@ -37,16 +37,12 @@ const Home: NextPage = () => {
     if (!message) {
       return;
     }
-    socket?.current?.emit("newMessage", message);
+    socket?.current?.emit("newMessage", message, user);
   };
 
-  const deleteAllMessages = () => {
-    fetch("/api/deleteAllMessages", {
-      method: "POST",
-    }).then(() => {
-      refreshChatDisplay();
-    });
-  };
+  const updateUser = (username: string) => {
+    setUser(username)
+  }
 
   const deleteAllMessagesWs = () => {
     socket?.current?.emit("deleteAllMessages")
@@ -109,7 +105,9 @@ const Home: NextPage = () => {
       <div className={styles["chat-display-holder"]}>
         <ChatDisplay messages={messages} />
       </div>
-      <TextInput onSend={addMessageHandlerWs} />
+      <TextInput onClick={addMessageHandlerWs} buttonTitle="Send" />
+      <h3 className={styles['update-user-title']}>Username: {user}</h3>
+      <TextInput onClick={updateUser} buttonTitle="Update" />
     </>
   );
 };

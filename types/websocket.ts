@@ -4,6 +4,6 @@ export interface ServerToClientEvents {
   updateMessages: (msgs: Message[]) => void;
 }
 export interface ClientToServerEvents {
-  newMessage: (msg: string) => void;
+  newMessage: (msg: string, user: string) => void;
   deleteAllMessages: () => void;
 }

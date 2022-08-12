@@ -36,3 +36,9 @@
   background-color: gray;
   color: white;
 }
+.update-user-title {
+  width: 100%;
+  background-color: white;
+  text-align: center;
+  margin-top: 5rem;
+}
