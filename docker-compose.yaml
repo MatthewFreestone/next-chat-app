@@ -1,6 +1,6 @@
 version: '1.0'
 services:
   next-js:
-    image: next-test
+    build: /
     ports:
       - 3000:3000
